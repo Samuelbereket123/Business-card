@@ -1,26 +1,8 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
+import {  } from "react";
 
 export default function Home() {
-  const [avatar, setAvatar] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatar(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const saveContact = () => {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
@@ -50,27 +32,11 @@ END:VCARD`;
 
       <main className="main-container">
         <div className="card">
-          {/* Avatar Section */}
-          <div className="avatar-outer" onClick={handleImageClick}>
+          {/* Static Avatar Section */}
+          <div className="avatar-outer">
             <div className="avatar-inner">
-              {avatar ? (
-                <img src={avatar} alt="Samuel Bereket" className="avatar-img" />
-              ) : (
-                <div className="avatar-placeholder">SB</div>
-              )}
+              <img src="/samuel.jpg" alt="Samuel Bereket" className="avatar-img" />
             </div>
-            <div className="upload-hint">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.72,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56ZM128,184a44,44,0,1,1,44-44A44.05,44.05,0,0,1,128,184Zm0-72a28,28,0,1,0,28,28A28,28,0,0,0,128,112Z"></path>
-              </svg>
-            </div>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleImageChange}
-              accept="image/*"
-              style={{ display: "none" }}
-            />
           </div>
 
           {/* Identity */}
